@@ -29,7 +29,6 @@ class ShoppingList : AppCompatActivity() {
         val userItemEditText = findViewById<EditText>(R.id.userInput)
         val addButton = findViewById<Button>(R.id.addButton)
         addButton.setOnClickListener {
-            print("a")
             val userItemText = userItemEditText.text.toString()
             if (userItemText.isNotEmpty()) {
                 val item = Item(userItemText)
