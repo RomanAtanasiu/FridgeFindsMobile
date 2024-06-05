@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ShoppingList : AppCompatActivity() {
@@ -20,21 +21,25 @@ class ShoppingList : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_shopping_list)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MyAdapter(mData)
         recyclerView.adapter = adapter
 
         val userItemEditText = findViewById<EditText>(R.id.userInput)
         val addButton = findViewById<Button>(R.id.addButton)
         addButton.setOnClickListener {
+            print("a")
             val userItemText = userItemEditText.text.toString()
             if (userItemText.isNotEmpty()) {
                 val item = Item(userItemText)
-                mData.add(item)
-                adapter.notifyItemInserted(mData.size - 1)
+                adapter.addItem(item)
                 userItemEditText.text.clear()
             }
         }
+
+        val delete = findViewById<Button>(R.id.deleteItems)
+        delete.setOnClickListener {adapter.deleteItems()}
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
