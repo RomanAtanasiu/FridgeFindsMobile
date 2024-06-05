@@ -19,7 +19,7 @@ class PantallaInicio : AppCompatActivity() {
             insets
         }
 
-        val buttonMain: ImageButton = findViewById(R.id.shopping)
+        val buttonMain: ImageButton = findViewById(R.id.list)
         buttonMain.setOnClickListener {
             val intent = Intent(this, ShoppingList::class.java)
             startActivity(intent)
